@@ -53,9 +53,9 @@ void error_arg(){
 void print_help(){
 	printf("Menu de ayuda\n");
 	printf("Programa toma como entrada una imagen en formato PNG o JPEG y le aplica una transformacion a escala de grises\n");
-	printf("-h: Abre el menu de ayuda");
-	printf("-o: Establede el path del archivo a procesar. En caso de no utiliza, tomara como path al primer argumento sin identificador '-' dado\n");
-	printf("-i: Establece el path de salida para el archivo procesado. En caso de no utilizar, se muestra un mensaje de error solicitando un path de salida\n");
+	printf("-h: Abre el menu de ayuda\n");
+	printf("-i: Establede el path del archivo a procesar. En caso de no utiliza, tomara como path al primer argumento sin identificador '-' dado\n");
+	printf("-o: Establece el path de salida para el archivo procesado. En caso de no utilizar, se muestra un mensaje de error solicitando un path de salida\n");
 }
 
 /*Determina si es PNG o JPEG
@@ -98,7 +98,7 @@ int main( int argc, char *argv[] ){
 				print_help(); 
 				return 0;
 			}	
-			else if( !strcmp(argv[i],"-i") ){ //Agregar path de salida
+			else  if( !strcmp(argv[i],"-i") ){ //Agregar path de entrada
 				if( (i+1) < argc && !hay_entrada ){
 					input_path = argv[i+1];
 					i++;
@@ -141,7 +141,7 @@ int main( int argc, char *argv[] ){
 		
 	}
 	else {
-		printf("Debe ingresar algun argumento");
+		printf("Debe ingresar algun argumento\n");
 		return 1;
 	}
 }
