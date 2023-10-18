@@ -133,6 +133,7 @@ int main( int argc, char *argv[] ){
 
 		if( !hay_salida ){
 			printf("Debe ingresar un path de salida utilizando el argumento -o en linea de comando\n");
+			return 1;
 		}	
 		if( hay_entrada && hay_salida ){		
 			ejecutar(input_path, output_path);	
