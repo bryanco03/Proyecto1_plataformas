@@ -113,28 +113,20 @@ void convertirAGrises(unsigned char *buffer, int width, int height, int numChann
     }
 }
 
-
-
-
-
-
-
-int main() {
+void grayscaleJPEG(char * input_path, char * output_path) {
     unsigned char *buffer;
     int width, height, numChannels;
 
-    if (leerImagenJPEG("Las-imagenes-raw-son-los-negativos-digitales.jpg", &buffer, &width, &height, &numChannels) == 0) {
+    if (leerImagenJPEG(input_path, &buffer, &width, &height, &numChannels) == 0) {
         // Procesa la imagen leída
         // printf("Ancho: %d, Alto: %d, Canales: %d\n", width, height, numChannels);
         
         convertirAGrises(buffer, width, height, numChannels);
-        escribirImagenJPEG("imagen_salida.jpg", buffer, width, height, numChannels);
+        escribirImagenJPEG(output_path, buffer, width, height, numChannels);
         
 
         // Liberar memoria 
         free(buffer);
-    }
-
-    return 0;
+    }   
 }
 

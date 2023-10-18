@@ -1,9 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <png.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include <string.h>
 
 int width, height;
 png_byte color_type;
@@ -135,94 +132,9 @@ void process_png_file() {
   	}	
 }
 
-//Imprime mensaje de error en argumentos
-void error_arg(){
-	printf("Hay un error con los argumentos ingrasados");
-}
-
-//Imprime menu de ayuda dado por argumento en linea de comando -h
-void print_help(){
-	printf("Menu de ayuda\n");
-	printf("Programa toma como entrada una imagen en formato png y le aplica una transformacion a escala de grises\n");
-	printf("-h: Abre el menu de ayuda\n");
-	printf("-o: Establece el path del archivo a procesar. En caso de no utilizar, tomara como path al primer argumento sin identificador '-' dado\n");
-	printf("-i: Establece el path de salida para el archivo procesado. En caso de no utilizar, se toma como path el mismo path de entrada\n");
-}
-
 //Programa principal
-int main( int argc, char * argv[]) {
-  
-	if( argc > 1){
-		char * input_path;
-		char * output_path;
-
-		bool hay_entrada = false;
-		bool hay_salida = false;		
-		
-		//Revisar argumentos
-		for( int i = 1; i < argc; i++){
-			if( !strcmp(argv[i],"-h") ){
-				print_help();
-				return 0;
-			}
-			else if( !strcmp(argv[i],"-i") ){
-				if( (i+1)<argc && !hay_entrada){
-					input_path = argv[i+1];
-					i++;
-					hay_entrada = true;
-				}
-				else{
-					error_arg();
-					return 1;
-				}
-			}
-			else if( !strcmp(argv[i],"-o") ){
-				if( (i+1)<argc && !hay_salida ){
-					output_path = argv[i+1];
-					i++;
-					hay_salida = true;
-				}
-				else{
-					error_arg();
-					return 1;
-				}	
-			}
-			else if( !hay_entrada && !hay_salida ){
-				input_path = argv[i];
-				output_path = argv[i];
-				hay_salida = true;
-				hay_entrada = true;
-			}
-			else{
-				error_arg();
-				return 1;
-			}	
-		}
-		if(!hay_salida){
-			output_path = input_path;
-			hay_salida = true;
-		}	
-		if(hay_entrada && hay_salida){
-			read_png_file(input_path);
-			process_png_file();
-			write_png_file(output_path);
-			return 0;			
-		}
-		else{
-			printf("Error en la ejecucion");
-			return 1;
-		}
-	}
-	else{
-		printf("Debe ingresar algun argumento");
-		return 1;
-	}
-	
-	
-  	//read_png_file(argv[1]);
-  	//process_png_file();
-  	//write_png_file(argv[2]);
-
-  	//return 0;
+void grayscalePNG( char * input_path, char * output_path) {
+	read_png_file(input_path);
+	process_png_file();
+	write_png_file(output_path);
 }
-
